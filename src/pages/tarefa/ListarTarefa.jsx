@@ -17,6 +17,8 @@ import Modal from '@mui/material/Modal';
 
 import CriarTarefa from './CriarTarefa';
 import EditarTarefa from './EditarTarefa';
+import DateDisplay from '../../shared/DateDisplay';
+import './listaTarefa.css'
 
 //A função abaixo é usada para criar o array contendo os dados iniciais da listagem de tarefas.
 function createData(
@@ -92,14 +94,14 @@ const ListarTarefa = () => {
             <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
-                <TableRow>
+                <TableRow className='header_table'>
                     <TableCell>#</TableCell>
-                    <TableCell>Título</TableCell>
-                    <TableCell align="right">Descrição</TableCell>
-                    <TableCell align="right">Data de Início</TableCell>
-                    <TableCell align="right">Data de Finalização</TableCell>
-                    <TableCell align="right">Status</TableCell>
-                    <TableCell align="right">Recurso</TableCell>
+                    <TableCell className='header_font'>Título</TableCell>
+                    <TableCell className='header_font' align="right">Descrição</TableCell>
+                    <TableCell className='header_font' align="right">Data de Início</TableCell>
+                    <TableCell className='header_font' align="right">Data de Finalização</TableCell>
+                    <TableCell className='header_font' align="right">Status</TableCell>
+                    <TableCell className='header_font' align="right">Recurso</TableCell>
                     <TableCell align="left"></TableCell>
                     <TableCell align="left"></TableCell>
                 </TableRow>
@@ -117,9 +119,9 @@ const ListarTarefa = () => {
                           {row.tituloTarefa}
                       </TableCell>
                       <TableCell align="right">{row.descricaoTarefa}</TableCell>
-                      <TableCell align="right">{row.inicioTarefa}</TableCell>
-                      <TableCell align="right">{row.fimTarefa}</TableCell>
-                      <TableCell align="right">{row.statusTarefa}</TableCell>
+                      <TableCell align="right"><DateDisplay date={row.inicioTarefa} formatString="dd/MM/yyyy"/></TableCell>
+                      <TableCell align="right"><DateDisplay date={row.fimTarefa} formatString="dd/MM/yyyy"/></TableCell>
+                      <TableCell align="right"  style={{color: row.statusTarefa === 'Concluída' ? 'darkgreen' : row.statusTarefa === 'Em Andamento'? 'blueviolet' : 'orange'}}>{row.statusTarefa}</TableCell>
                       <TableCell align="right">{row.recursoTarefa}</TableCell>
                       <TableCell align="center">
                         <Button variant="contained" color="success" onClick={() => handleEditar(row.idTarefa)}><EditIcon fontSize="small" /></Button>            
